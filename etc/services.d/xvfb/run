@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+set -e
+if [[ "$RESOLUTION" == "" ]]; then
+    RESOLUTION=1280x600x24
+fi
+Xvfb "$DISPLAY" -screen 0 "$RESOLUTION"

@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv bash
+set -e
+USER=${USER:-root}
+HOME=/root
+if [ "$USER" != "root" ]; then
+    useradd --create-home --shell /bin/bash --user-group --groups sudo $USER
+    if [[ "$PASSWORD" == "" ]]; then
+        PASSWORD=kali
+    fi
+    HOME="/home/$USER"
+    echo "$USER:$PASSWORD" | chpasswd
+fi
+chown -R "$USER:$USER" "$HOME"
+echo "root:${ROOT_PASSWORD:-root}" | chpasswd
